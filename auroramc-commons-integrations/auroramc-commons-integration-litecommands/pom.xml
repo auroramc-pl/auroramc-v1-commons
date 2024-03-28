@@ -18,8 +18,8 @@
   <dependencies>
     <dependency>
       <groupId>pl.auroramc</groupId>
-      <artifactId>auroramc-messages-core</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <artifactId>auroramc-commons-core</artifactId>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

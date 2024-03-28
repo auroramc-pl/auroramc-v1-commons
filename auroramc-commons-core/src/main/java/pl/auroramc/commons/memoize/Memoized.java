@@ -11,8 +11,8 @@ public class Memoized<T> {
   private final Duration timeToLive;
   private final Supplier<T> valueInitializer;
   private T value;
-  private Instant valueUpdatedAt;
-  private Instant valueUpdatesAt;
+  private Instant updatedAt;
+  private Instant updatesAt;
 
   private Memoized(final Duration timeToLive, final Supplier<T> valueInitializer) {
     this.timeToLive = timeToLive;
@@ -25,11 +25,7 @@ public class Memoized<T> {
   }
 
   public T get() {
-    if (value == null) {
-      update();
-    }
-
-    if (valueUpdatesAt.isBefore(now())) {
+    if (value == null || isExpired()) {
       update();
     }
 
@@ -40,17 +36,21 @@ public class Memoized<T> {
     return timeToLive;
   }
 
-  public Instant getValueUpdatedAt() {
-    return valueUpdatedAt;
+  public Instant getUpdatedAt() {
+    return updatedAt;
   }
 
-  public Instant getValueUpdatesAt() {
-    return valueUpdatesAt;
+  public Instant getUpdatesAt() {
+    return updatesAt;
   }
 
   private void update() {
     value = valueInitializer.get();
-    valueUpdatedAt = now();
-    valueUpdatesAt = valueUpdatedAt.plus(timeToLive);
+    updatedAt = now();
+    updatesAt = updatedAt.plus(timeToLive);
+  }
+
+  private boolean isExpired() {
+    return updatesAt.isBefore(now());
   }
 }

@@ -1,5 +1,9 @@
 package pl.auroramc.commons.i18n.plural.variety;
 
+import static pl.auroramc.commons.i18n.plural.PluralizationCase.PLURAL_GENITIVE;
+import static pl.auroramc.commons.i18n.plural.PluralizationCase.PLURAL_NOMINATIVE;
+import static pl.auroramc.commons.i18n.plural.PluralizationCase.SINGULAR;
+
 import java.util.EnumMap;
 import java.util.Map;
 import pl.auroramc.commons.i18n.plural.PluralizationCase;
@@ -19,9 +23,9 @@ public class VarietiesByCasesBuilder {
   }
 
   public VarietiesByCasesBuilder withPluralForm(final String pluralForm) {
-    withPluralForm(PluralizationCase.SINGULAR, pluralForm);
-    withPluralForm(PluralizationCase.PLURAL_GENITIVE, pluralForm);
-    withPluralForm(PluralizationCase.PLURAL_NOMINATIVE, pluralForm);
+    withPluralForm(SINGULAR, pluralForm);
+    withPluralForm(PLURAL_GENITIVE, pluralForm);
+    withPluralForm(PLURAL_NOMINATIVE, pluralForm);
     return this;
   }
 

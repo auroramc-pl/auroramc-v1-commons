@@ -2,6 +2,7 @@ package pl.auroramc.commons.i18n.plural;
 
 import static java.lang.Math.abs;
 import static java.util.Locale.ENGLISH;
+import static pl.auroramc.commons.i18n.Locales.POLISH;
 import static pl.auroramc.commons.i18n.plural.PluralizationCase.PLURAL_GENITIVE;
 import static pl.auroramc.commons.i18n.plural.PluralizationCase.PLURAL_NOMINATIVE;
 import static pl.auroramc.commons.i18n.plural.PluralizationCase.SINGULAR;
@@ -12,8 +13,6 @@ import java.util.Map;
 
 public class Pluralizers {
 
-  private static final String POLISH_LOCALE_TAG = "pl";
-  private static final Locale POLISH = new Locale(POLISH_LOCALE_TAG);
   private static final Map<Locale, Pluralizer> PLURALIZES_BY_LOCALE = new HashMap<>();
 
   static {
