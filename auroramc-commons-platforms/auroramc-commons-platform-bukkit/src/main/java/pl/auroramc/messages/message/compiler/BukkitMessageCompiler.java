@@ -1,6 +1,5 @@
 package pl.auroramc.messages.message.compiler;
 
-import static pl.auroramc.messages.message.compiler.MessageCompiler.getMessageCompiler;
 import static pl.auroramc.messages.placeholder.evaluator.PlaceholderEvaluator.getReflectivePlaceholderEvaluator;
 import static pl.auroramc.messages.placeholder.resolver.BukkitPlaceholderResolver.getBukkitPlaceholderResolver;
 import static pl.auroramc.messages.placeholder.scanner.PlaceholderScanner.getPlaceholderScanner;
@@ -13,16 +12,12 @@ import pl.auroramc.messages.placeholder.resolver.PlaceholderResolver;
 import pl.auroramc.messages.placeholder.transformer.pack.ObjectTransformerPack;
 import pl.auroramc.messages.placeholder.transformer.pack.standard.StandardObjectTransformerPack;
 
-public class BukkitMessageCompiler extends MessageCompilerImpl<Player> {
+public interface BukkitMessageCompiler extends MessageCompiler<Player> {
 
-  BukkitMessageCompiler(final PlaceholderResolver<Player> placeholderResolver) {
-    super(placeholderResolver);
-  }
-
-  public static MessageCompiler<Player> getBukkitMessageCompiler(
+  static BukkitMessageCompiler getBukkitMessageCompiler(
       final ObjectTransformerPack... transformerPacks) {
-    final MessageCompiler<Player> messageCompiler =
-        getMessageCompiler(
+    final BukkitMessageCompiler messageCompiler =
+        getBukkitMessageCompiler(
             getBukkitPlaceholderResolver(
                 getObjectTransformerRegistry(transformerPacks),
                 getPlaceholderScanner(),
@@ -31,5 +26,10 @@ public class BukkitMessageCompiler extends MessageCompilerImpl<Player> {
     messageCompiler.register(new StandardObjectTransformerPack());
     messageCompiler.register(new BukkitObjectTransformerPack(messageCompiler));
     return messageCompiler;
+  }
+
+  static BukkitMessageCompiler getBukkitMessageCompiler(
+      final PlaceholderResolver<Player> placeholderResolver) {
+    return new BukkitMessageCompilerImpl(placeholderResolver);
   }
 }

@@ -23,10 +23,16 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>com.pivovarit</groupId>
+      <artifactId>throwing-function</artifactId>
+      <version>1.5.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>it.unimi.dsi</groupId>
       <artifactId>sux4j</artifactId>
       <version>5.4.1</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
       <exclusions>
         <exclusion>
           <groupId>org.slf4j</groupId>

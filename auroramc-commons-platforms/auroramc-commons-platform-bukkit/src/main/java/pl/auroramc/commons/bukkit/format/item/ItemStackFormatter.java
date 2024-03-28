@@ -22,8 +22,8 @@ public final class ItemStackFormatter {
     return messageCompiler
         .compile(
             null,
-            MutableMessage.of("<dark_gray>x{item.@amount} <white>{name}")
-                .placeholder("item", itemStack)
+            MutableMessage.of("<dark_gray>x{amount} <white>{name}")
+                .placeholder("amount", itemStack.getAmount())
                 .placeholder("name", getDisplayName(itemStack)))
         .getComponent()
         .hoverEvent(itemStack.asHoverEvent());

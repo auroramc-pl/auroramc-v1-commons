@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 
 public final class TemporalFormatter {
 
@@ -15,7 +16,7 @@ public final class TemporalFormatter {
 
   private TemporalFormatter() {}
 
-  public static String getFormattedTemporal(final java.time.temporal.TemporalAccessor period) {
+  public static String getFormattedTemporal(final TemporalAccessor period) {
     return LONG_DATE_TIME_FORMATTER.format(period);
   }
 
@@ -23,7 +24,7 @@ public final class TemporalFormatter {
     return getFormattedTemporal(ZonedDateTime.ofInstant(period, SYSTEM_ZONE_ID));
   }
 
-  public static String getFormattedTemporalShortly(final java.time.temporal.TemporalAccessor period) {
+  public static String getFormattedTemporalShortly(final TemporalAccessor period) {
     return SHORT_DATE_TIME_FORMATTER.format(period);
   }
 
