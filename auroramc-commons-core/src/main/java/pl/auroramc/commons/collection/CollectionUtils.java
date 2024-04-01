@@ -21,7 +21,7 @@ public final class CollectionUtils {
   public static <T> List<List<T>> partition(final List<T> items, final int partitionSize) {
     return iterate(0, index -> index + partitionSize)
         .limit((long) ceil((double) items.size() / partitionSize))
-        .mapToObj(i -> items.subList(i, min(i + partitionSize, items.size())))
+        .mapToObj(index -> items.subList(index, min(index + partitionSize, items.size())))
         .toList();
   }
 }
