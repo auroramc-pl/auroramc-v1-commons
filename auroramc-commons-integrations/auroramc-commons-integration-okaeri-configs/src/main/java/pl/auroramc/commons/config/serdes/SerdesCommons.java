@@ -8,6 +8,7 @@ public class SerdesCommons extends eu.okaeri.configs.serdes.commons.SerdesCommon
   @Override
   public void register(final @NotNull SerdesRegistry registry) {
     super.register(registry);
+    registry.register(new PropertiesSerializer());
     registry.register(new StringToDecimalFormatTransformer());
     registry.register(new StringToLocaleTransformer());
     registry.register(new StringToZoneIdTransformer());

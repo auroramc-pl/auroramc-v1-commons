@@ -5,14 +5,16 @@ import eu.okaeri.configs.schema.GenericsDeclaration;
 import eu.okaeri.configs.serdes.DeserializationData;
 import eu.okaeri.configs.serdes.ObjectSerializer;
 import eu.okaeri.configs.serdes.SerializationData;
+import java.util.Properties;
 import org.jetbrains.annotations.NotNull;
 
 class HikariConfigSerializer implements ObjectSerializer<HikariConfig> {
 
-  private static final String DRIVER_CLASS_NAME_VARIABLE_KEY = "driver-class-name";
-  private static final String JDBC_URL_VARIABLE_KEY = "jdbc-url";
+  private static final String JDBC_URL_VARIABLE_KEY = "jdbcUrl";
   private static final String USERNAME_VARIABLE_KEY = "username";
   private static final String PASSWORD_VARIABLE_KEY = "password";
+  private static final String DRIVER_CLASS_NAME_VARIABLE_KEY = "driverClassName";
+  private static final String DATA_SOURCE_PROPERTIES_KEY = "dataSourceProperties";
 
   HikariConfigSerializer() {}
 
@@ -28,19 +30,20 @@ class HikariConfigSerializer implements ObjectSerializer<HikariConfig> {
       final @NotNull GenericsDeclaration generics) {
     data.add(JDBC_URL_VARIABLE_KEY, object.getJdbcUrl());
 
-    final boolean whetherDriverClassNameIsSpecified = object.getDriverClassName() != null;
-    if (whetherDriverClassNameIsSpecified) {
-      data.add(DRIVER_CLASS_NAME_VARIABLE_KEY, object.getDriverClassName());
-    }
-
-    final boolean whetherUsernameIsSpecified = object.getUsername() != null;
-    if (whetherUsernameIsSpecified) {
+    if (object.getUsername() != null) {
       data.add(USERNAME_VARIABLE_KEY, object.getUsername());
     }
 
-    final boolean whetherPasswordIsSpecified = object.getPassword() != null;
-    if (whetherPasswordIsSpecified) {
+    if (object.getPassword() != null) {
       data.add(PASSWORD_VARIABLE_KEY, object.getPassword());
+    }
+
+    if (object.getDriverClassName() != null) {
+      data.add(DRIVER_CLASS_NAME_VARIABLE_KEY, object.getDriverClassName());
+    }
+
+    if (!object.getDataSourceProperties().isEmpty()) {
+      data.add(DATA_SOURCE_PROPERTIES_KEY, object.getDataSourceProperties());
     }
   }
 
@@ -50,20 +53,20 @@ class HikariConfigSerializer implements ObjectSerializer<HikariConfig> {
     final HikariConfig hikariConfig = new HikariConfig();
     hikariConfig.setJdbcUrl(data.get(JDBC_URL_VARIABLE_KEY, String.class));
 
-    final boolean whetherDriverClassNameIsSpecified =
-        data.containsKey(DRIVER_CLASS_NAME_VARIABLE_KEY);
-    if (whetherDriverClassNameIsSpecified) {
-      hikariConfig.setDriverClassName(data.get(DRIVER_CLASS_NAME_VARIABLE_KEY, String.class));
-    }
-
-    final boolean whetherUsernameIsSpecified = data.containsKey(USERNAME_VARIABLE_KEY);
-    if (whetherUsernameIsSpecified) {
+    if (data.containsKey(USERNAME_VARIABLE_KEY)) {
       hikariConfig.setUsername(data.get(USERNAME_VARIABLE_KEY, String.class));
     }
 
-    final boolean whetherPasswordIsSpecified = data.containsKey(PASSWORD_VARIABLE_KEY);
-    if (whetherPasswordIsSpecified) {
+    if (data.containsKey(PASSWORD_VARIABLE_KEY)) {
       hikariConfig.setPassword(data.get(PASSWORD_VARIABLE_KEY, String.class));
+    }
+
+    if (data.containsKey(DRIVER_CLASS_NAME_VARIABLE_KEY)) {
+      hikariConfig.setDriverClassName(data.get(DRIVER_CLASS_NAME_VARIABLE_KEY, String.class));
+    }
+
+    if (data.containsKey(DATA_SOURCE_PROPERTIES_KEY)) {
+      hikariConfig.setDataSourceProperties(data.get(DATA_SOURCE_PROPERTIES_KEY, Properties.class));
     }
 
     return hikariConfig;

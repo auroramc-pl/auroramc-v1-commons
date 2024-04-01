@@ -16,6 +16,14 @@ public class JulietConfig extends OkaeriConfig {
     hikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3306/auroramc_economy");
     hikariConfig.setUsername("auroramc_identity");
     hikariConfig.setPassword("my-secret-password-123-!@#");
+
+    hikariConfig.addDataSourceProperty("cachePrepStmts", "true");
+    hikariConfig.addDataSourceProperty("prepStmtCacheSize", "250");
+    hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+
+    // https://vladmihalcea.com/mysql-rewritebatchedstatements/
+    hikariConfig.addDataSourceProperty("rewriteBatchedStatements", "true");
+
     return hikariConfig;
   }
 }
