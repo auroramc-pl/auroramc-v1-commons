@@ -1,7 +1,7 @@
 package pl.auroramc.commons.bukkit;
 
-import java.time.Duration;
-import java.util.Optional;
+import static java.util.Optional.ofNullable;
+
 import java.util.Set;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
@@ -13,13 +13,9 @@ import org.bukkit.plugin.ServicePriority;
 
 public final class BukkitUtils {
 
-  private static final long TICKS_PER_SECOND = 20L;
-  private static final long MILLISECONDS_PER_SECOND = 1000L;
-  private static final long MILLISECONDS_PER_TICK = MILLISECONDS_PER_SECOND / TICKS_PER_SECOND;
-
   private BukkitUtils() {}
 
-  public static void appendItemStackOrDropBelow(final Player player, final ItemStack itemStack) {
+  public static void giveOrDropItemStack(final Player player, final ItemStack itemStack) {
     player
         .getInventory()
         .addItem(itemStack)
@@ -28,12 +24,8 @@ public final class BukkitUtils {
                 player.getWorld().dropItemNaturally(player.getLocation(), remainingItemStack));
   }
 
-  public static long getTicksOf(final Duration period) {
-    return period.toMillis() / MILLISECONDS_PER_TICK;
-  }
-
   public static <T> T resolveService(final Server server, final Class<T> serviceType) {
-    return Optional.ofNullable(server.getServicesManager().getRegistration(serviceType))
+    return ofNullable(server.getServicesManager().getRegistration(serviceType))
         .map(RegisteredServiceProvider::getProvider)
         .orElseThrow(
             () ->

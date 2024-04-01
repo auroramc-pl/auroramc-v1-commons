@@ -1,7 +1,5 @@
 package pl.auroramc.commons.bukkit.scheduler;
 
-import static java.time.Duration.ZERO;
-import static pl.auroramc.commons.bukkit.BukkitUtils.getTicksOf;
 import static pl.auroramc.commons.scheduler.SchedulerPoll.ASYNC;
 import static pl.auroramc.commons.scheduler.SchedulerPoll.SYNC;
 
@@ -11,6 +9,7 @@ import java.util.concurrent.CompletableFuture;
 import org.bukkit.Server;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
+import pl.auroramc.commons.bukkit.time.MinecraftTimeEquivalent;
 import pl.auroramc.commons.scheduler.Scheduler;
 import pl.auroramc.commons.scheduler.SchedulerPoll;
 
@@ -48,7 +47,8 @@ class BukkitSchedulerImpl implements Scheduler {
     if (delay.isZero()) {
       bukkitScheduler.runTask(plugin, () -> tryRun(future, supplier));
     } else {
-      bukkitScheduler.runTaskLater(plugin, () -> tryRun(future, supplier), getTicksOf(delay));
+      bukkitScheduler.runTaskLater(
+          plugin, () -> tryRun(future, supplier), MinecraftTimeEquivalent.of(delay));
     }
 
     return future;
@@ -61,7 +61,7 @@ class BukkitSchedulerImpl implements Scheduler {
       bukkitScheduler.runTaskAsynchronously(plugin, () -> tryRun(future, supplier));
     } else {
       bukkitScheduler.runTaskLaterAsynchronously(
-          plugin, () -> tryRun(future, supplier), getTicksOf(delay));
+          plugin, () -> tryRun(future, supplier), MinecraftTimeEquivalent.of(delay));
     }
     return future;
   }
@@ -88,10 +88,12 @@ class BukkitSchedulerImpl implements Scheduler {
   }
 
   private void scheduleSync(final Runnable task, final Duration period) {
-    bukkitScheduler.runTaskTimer(plugin, task, getTicksOf(ZERO), getTicksOf(period));
+    final long delay = MinecraftTimeEquivalent.of(period);
+    bukkitScheduler.runTaskTimer(plugin, task, delay, delay);
   }
 
   private void scheduleAsync(final Runnable task, final Duration period) {
-    bukkitScheduler.runTaskTimerAsynchronously(plugin, task, getTicksOf(ZERO), getTicksOf(period));
+    final long delay = MinecraftTimeEquivalent.of(period);
+    bukkitScheduler.runTaskTimerAsynchronously(plugin, task, delay, delay);
   }
 }
