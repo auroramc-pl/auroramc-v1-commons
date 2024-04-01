@@ -2,6 +2,8 @@ package pl.auroramc.commons.format.decimal;
 
 import static java.lang.Math.ceil;
 import static java.lang.Math.floor;
+import static pl.auroramc.commons.format.decimal.DecimalUtils.getIntegralPart;
+import static pl.auroramc.commons.format.decimal.DecimalUtils.getLengthOfIntegralPart;
 
 import java.math.BigDecimal;
 
@@ -31,9 +33,9 @@ public class DecimalFormatter {
       return getTruncatedAmount(amount);
     }
 
-    final long integralPart = DecimalUtils.getIntegralPart(amount);
+    final long integralPart = getIntegralPart(amount);
     final int integralPartLength =
-        DecimalUtils.getLengthOfIntegralPart(integralPart) - INTEGRAL_PART_INIT_OFFSET;
+        getLengthOfIntegralPart(integralPart) - INTEGRAL_PART_INIT_OFFSET;
     final int nearestScaleDivider = integralPartLength / 3 - 1;
 
     return getFormattedAmountWithSuffix(
