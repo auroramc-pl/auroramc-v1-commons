@@ -16,6 +16,10 @@ public class MinecraftTimeEquivalent {
   private MinecraftTimeEquivalent() {}
 
   public static long of(final Duration period) {
+    if (period.isZero()) {
+      return 0;
+    }
+
     return TICK * (period.toMillis() / MILLISECONDS_PER_TICK);
   }
 }
