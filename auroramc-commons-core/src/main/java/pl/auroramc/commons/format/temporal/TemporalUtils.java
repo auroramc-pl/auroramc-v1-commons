@@ -1,26 +1,26 @@
 package pl.auroramc.commons.format.temporal;
 
+import static java.time.ZoneOffset.UTC;
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.ZoneId;
 
 public final class TemporalUtils {
 
-  private static final ZoneId SYSTEM_ZONE_ID = ZoneId.systemDefault();
   private static final LocalTime END_OF_DAY = LocalTime.of(23, 59, 59, 999_999_999);
 
   private TemporalUtils() {}
 
   public static Instant getMaximumTimeOfDay(final Instant period) {
-    return LocalDate.ofInstant(period, SYSTEM_ZONE_ID)
+    return LocalDate.ofInstant(period, UTC)
         .atTime(END_OF_DAY)
-        .toInstant(SYSTEM_ZONE_ID.getRules().getOffset(period));
+        .toInstant(UTC);
   }
 
   public static Instant getMinimumTimeOfDay(final Instant period) {
-    return LocalDate.ofInstant(period, SYSTEM_ZONE_ID)
+    return LocalDate.ofInstant(period, UTC)
         .atStartOfDay()
-        .toInstant(SYSTEM_ZONE_ID.getRules().getOffset(period));
+        .toInstant(UTC.getRules().getOffset(period));
   }
 }

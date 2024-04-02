@@ -1,4 +1,4 @@
-package pl.auroramc.commons.integration.litecommands;
+package pl.auroramc.commons.integration.litecommands.message;
 
 import static pl.auroramc.messages.message.display.MessageDisplay.CHAT;
 

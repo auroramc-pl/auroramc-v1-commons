@@ -1,8 +1,8 @@
 package pl.auroramc.commons.range;
 
-public record Between<T extends Comparable<T>>(T min, T max) {
+public record Between<T extends Comparable<T>>(T maximum, T minimum) {
 
   boolean matches(final T query) {
-    return query.compareTo(min) >= 0 && query.compareTo(max) <= 0;
+    return query.compareTo(maximum) <= 0 && query.compareTo(minimum) >= 0;
   }
 }
