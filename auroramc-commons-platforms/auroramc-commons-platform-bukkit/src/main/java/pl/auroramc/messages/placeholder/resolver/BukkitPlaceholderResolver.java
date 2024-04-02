@@ -2,13 +2,14 @@ package pl.auroramc.messages.placeholder.resolver;
 
 import static me.clip.placeholderapi.PlaceholderAPI.setPlaceholders;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import pl.auroramc.messages.placeholder.context.PlaceholderContext;
 import pl.auroramc.messages.placeholder.evaluator.PlaceholderEvaluator;
 import pl.auroramc.messages.placeholder.scanner.PlaceholderScanner;
 import pl.auroramc.messages.placeholder.transformer.registry.ObjectTransformerRegistry;
 
-public class BukkitPlaceholderResolver extends PlaceholderResolverImpl<Player> {
+public class BukkitPlaceholderResolver extends PlaceholderResolverImpl<CommandSender> {
 
   private BukkitPlaceholderResolver(
       final ObjectTransformerRegistry transformerRegistry,
@@ -27,11 +28,11 @@ public class BukkitPlaceholderResolver extends PlaceholderResolverImpl<Player> {
 
   @Override
   public String apply(
-      final Player viewer, final String template, final PlaceholderContext context) {
-    if (viewer == null) {
-      return super.apply(null, template, context);
+      final CommandSender viewer, final String template, final PlaceholderContext context) {
+    if (viewer instanceof Player player) {
+      return setPlaceholders(player, super.apply(viewer, template, context));
     }
 
-    return setPlaceholders(viewer, super.apply(viewer, template, context));
+    return super.apply(null, template, context);
   }
 }

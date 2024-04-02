@@ -5,14 +5,14 @@ import static pl.auroramc.messages.placeholder.resolver.BukkitPlaceholderResolve
 import static pl.auroramc.messages.placeholder.scanner.PlaceholderScanner.getPlaceholderScanner;
 import static pl.auroramc.messages.placeholder.transformer.registry.ObjectTransformerRegistry.getObjectTransformerRegistry;
 
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 import pl.auroramc.commons.bukkit.message.placeholder.transformer.pack.BukkitObjectTransformerPack;
 import pl.auroramc.commons.message.placeholder.transformer.pack.CommonsObjectTransformerPack;
 import pl.auroramc.messages.placeholder.resolver.PlaceholderResolver;
 import pl.auroramc.messages.placeholder.transformer.pack.ObjectTransformerPack;
 import pl.auroramc.messages.placeholder.transformer.pack.standard.StandardObjectTransformerPack;
 
-public interface BukkitMessageCompiler extends MessageCompiler<Player> {
+public interface BukkitMessageCompiler extends MessageCompiler<CommandSender> {
 
   static BukkitMessageCompiler getBukkitMessageCompiler(
       final ObjectTransformerPack... transformerPacks) {
@@ -29,7 +29,7 @@ public interface BukkitMessageCompiler extends MessageCompiler<Player> {
   }
 
   static BukkitMessageCompiler getBukkitMessageCompiler(
-      final PlaceholderResolver<Player> placeholderResolver) {
+      final PlaceholderResolver<CommandSender> placeholderResolver) {
     return new BukkitMessageCompilerImpl(placeholderResolver);
   }
 }
