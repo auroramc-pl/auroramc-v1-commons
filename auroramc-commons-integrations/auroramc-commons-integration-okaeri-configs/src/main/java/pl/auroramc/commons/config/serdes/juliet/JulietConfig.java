@@ -13,7 +13,7 @@ public class JulietConfig extends OkaeriConfig {
   private HikariConfig getDefaultHikariConfig() {
     final HikariConfig hikariConfig = new HikariConfig();
     hikariConfig.setDriverClassName("org.mariadb.jdbc.Driver");
-    hikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3306/auroramc_economy");
+    hikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3306/auroramc_dev");
     hikariConfig.setUsername("auroramc_identity");
     hikariConfig.setPassword("my-secret-password-123-!@#");
 
