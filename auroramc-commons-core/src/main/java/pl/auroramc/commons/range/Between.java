@@ -10,6 +10,10 @@ public record Between<T extends Comparable<T>>(T maximum, T minimum) {
     return new Between<>(maximum, minimum);
   }
 
+  public boolean single() {
+    return maximum.equals(minimum);
+  }
+
   public boolean matches(final T query) {
     return query.compareTo(maximum) <= 0 && query.compareTo(minimum) >= 0;
   }
