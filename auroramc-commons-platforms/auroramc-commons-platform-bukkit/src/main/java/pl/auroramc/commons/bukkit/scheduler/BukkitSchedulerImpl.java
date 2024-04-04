@@ -1,11 +1,13 @@
 package pl.auroramc.commons.bukkit.scheduler;
 
+import static java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor;
 import static pl.auroramc.commons.scheduler.SchedulerPoll.ASYNC;
 import static pl.auroramc.commons.scheduler.SchedulerPoll.SYNC;
 
 import com.pivovarit.function.ThrowingSupplier;
 import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
 import org.bukkit.Server;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -15,6 +17,7 @@ import pl.auroramc.commons.scheduler.SchedulerPoll;
 
 class BukkitSchedulerImpl implements Scheduler {
 
+  private static final ExecutorService VIRTUAL_THREAD_PER_TASK = newVirtualThreadPerTaskExecutor();
   private final Plugin plugin;
   private final Server server;
   private final BukkitScheduler bukkitScheduler;
@@ -58,7 +61,7 @@ class BukkitSchedulerImpl implements Scheduler {
       final ThrowingSupplier<T, Exception> supplier, final Duration delay) {
     final CompletableFuture<T> future = new CompletableFuture<>();
     if (delay.isZero()) {
-      bukkitScheduler.runTaskAsynchronously(plugin, () -> tryRun(future, supplier));
+      VIRTUAL_THREAD_PER_TASK.submit(() -> tryRun(future, supplier));
     } else {
       bukkitScheduler.runTaskLaterAsynchronously(
           plugin, () -> tryRun(future, supplier), MinecraftTimeEquivalent.of(delay));
