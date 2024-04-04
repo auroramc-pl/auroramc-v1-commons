@@ -16,7 +16,8 @@ public class JulietConfig extends OkaeriConfig {
     hikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3306/auroramc_dev");
     hikariConfig.setUsername("auroramc_identity");
     hikariConfig.setPassword("my-secret-password-123-!@#");
-
+    hikariConfig.setMaximumPoolSize(10);
+    
     hikariConfig.addDataSourceProperty("cachePrepStmts", "true");
     hikariConfig.addDataSourceProperty("prepStmtCacheSize", "250");
     hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");

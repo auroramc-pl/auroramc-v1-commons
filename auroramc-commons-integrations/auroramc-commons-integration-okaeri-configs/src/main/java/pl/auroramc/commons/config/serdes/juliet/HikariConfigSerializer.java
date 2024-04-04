@@ -15,6 +15,8 @@ class HikariConfigSerializer implements ObjectSerializer<HikariConfig> {
   private static final String PASSWORD_VARIABLE_KEY = "password";
   private static final String DRIVER_CLASS_NAME_VARIABLE_KEY = "driverClassName";
   private static final String DATA_SOURCE_PROPERTIES_KEY = "dataSourceProperties";
+  private static final String MAXIMUM_POOL_SIZE = "maximumPoolSize";
+  private static final int UNDEFINED_POOL_SIZE = -1;
 
   HikariConfigSerializer() {}
 
@@ -42,6 +44,10 @@ class HikariConfigSerializer implements ObjectSerializer<HikariConfig> {
       data.add(DRIVER_CLASS_NAME_VARIABLE_KEY, object.getDriverClassName());
     }
 
+    if (object.getMaximumPoolSize() != UNDEFINED_POOL_SIZE) {
+      data.add(MAXIMUM_POOL_SIZE, object.getMaximumPoolSize());
+    }
+
     if (!object.getDataSourceProperties().isEmpty()) {
       data.add(DATA_SOURCE_PROPERTIES_KEY, object.getDataSourceProperties());
     }
@@ -63,6 +69,10 @@ class HikariConfigSerializer implements ObjectSerializer<HikariConfig> {
 
     if (data.containsKey(DRIVER_CLASS_NAME_VARIABLE_KEY)) {
       hikariConfig.setDriverClassName(data.get(DRIVER_CLASS_NAME_VARIABLE_KEY, String.class));
+    }
+
+    if (data.containsKey(MAXIMUM_POOL_SIZE)) {
+      hikariConfig.setMaximumPoolSize(data.get(MAXIMUM_POOL_SIZE, Integer.class));
     }
 
     if (data.containsKey(DATA_SOURCE_PROPERTIES_KEY)) {
