@@ -17,22 +17,21 @@ public final class TemporalFormatter {
 
   private TemporalFormatter() {}
 
-  public static String getFormattedTemporal(final TemporalAccessor period) {
-    return LONG_DATE_TIME_FORMATTER.format(period);
+  public static String getFormattedTemporal(final TemporalAccessor temporal) {
+    return LONG_DATE_TIME_FORMATTER.format(temporal);
   }
 
-  public static String getFormattedTemporal(final Instant period) {
-    return getFormattedTemporal(ZonedDateTime.ofInstant(period, UTC));
+  public static String getFormattedTemporalShortly(final TemporalAccessor temporal) {
+    return SHORT_DATE_TIME_FORMATTER.format(temporal);
   }
 
-  public static String getFormattedTemporalShortly(final TemporalAccessor period) {
-    return SHORT_DATE_TIME_FORMATTER.format(period);
+  public static String getFormattedTemporal(final Instant instant) {
+    return getFormattedTemporal(ZonedDateTime.ofInstant(instant, UTC));
   }
 
-  public static String getFormattedTemporalShortly(final Instant period) {
-    return getFormattedTemporalShortly(ZonedDateTime.ofInstant(period, UTC));
+  public static String getFormattedTemporalShortly(final Instant instant) {
+    return getFormattedTemporalShortly(ZonedDateTime.ofInstant(instant, UTC));
   }
-
 
   public static Instant parseInstant(final String input) {
     return parseInstant(input, LONG_DATE_TIME_FORMATTER);

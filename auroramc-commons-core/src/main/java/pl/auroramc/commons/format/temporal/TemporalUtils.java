@@ -12,15 +12,15 @@ public final class TemporalUtils {
 
   private TemporalUtils() {}
 
-  public static Instant getMaximumTimeOfDay(final Instant period) {
-    return LocalDate.ofInstant(period, UTC)
+  public static Instant getMaximumTimeOfDay(final Instant instant) {
+    return LocalDate.ofInstant(instant, UTC)
         .atTime(END_OF_DAY)
         .toInstant(UTC);
   }
 
-  public static Instant getMinimumTimeOfDay(final Instant period) {
-    return LocalDate.ofInstant(period, UTC)
+  public static Instant getMinimumTimeOfDay(final Instant instant) {
+    return LocalDate.ofInstant(instant, UTC)
         .atStartOfDay()
-        .toInstant(UTC.getRules().getOffset(period));
+        .toInstant(UTC.getRules().getOffset(instant));
   }
 }

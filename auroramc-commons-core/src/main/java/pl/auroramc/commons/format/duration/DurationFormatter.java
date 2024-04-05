@@ -19,7 +19,7 @@ public final class DurationFormatter {
 
   private static final ChronoUnit[] UNITS =
       new ChronoUnit[] {YEARS, MONTHS, WEEKS, DAYS, HOURS, MINUTES, SECONDS, MILLIS};
-  private static final long[] UNIT_PERIODS =
+  private static final long[] UNIT_DURATIONS =
       new long[] {
         1_000L * 60 * 60 * 24 * 365,
         1_000L * 60 * 60 * 24 * 30,
@@ -29,7 +29,7 @@ public final class DurationFormatter {
         1_000L * 60,
         1_000L
       };
-  private static final long SMALLEST_UNIT_PERIOD = UNIT_PERIODS[UNIT_PERIODS.length - 1];
+  private static final long SMALLEST_UNIT_DURATION = UNIT_DURATIONS[UNIT_DURATIONS.length - 1];
   private final Pluralizer pluralizer;
   private final DurationFormatterSettings formatterSettings;
 
@@ -44,9 +44,9 @@ public final class DurationFormatter {
     this(pluralizer, formattingStyle.getFormatterSettings());
   }
 
-  public String getFormattedDuration(final Duration period) {
-    final long millis = period.toMillis();
-    if (SMALLEST_UNIT_PERIOD > millis) {
+  public String getFormattedDuration(final Duration duration) {
+    final long millis = duration.toMillis();
+    if (SMALLEST_UNIT_DURATION > millis) {
       final VarietiesByCases unitForm = formatterSettings.getUnitForm(MILLIS);
       return "%d %s".formatted(millis, pluralizer.pluralize(unitForm, millis));
     }
@@ -55,12 +55,12 @@ public final class DurationFormatter {
 
     String lastMatch = null;
     long remainingMillis = millis;
-    for (int index = 0; index < UNIT_PERIODS.length; index++) {
-      if (remainingMillis < SMALLEST_UNIT_PERIOD) {
+    for (int index = 0; index < UNIT_DURATIONS.length; index++) {
+      if (remainingMillis < SMALLEST_UNIT_DURATION) {
         break;
       }
 
-      final long divider = UNIT_PERIODS[index];
+      final long divider = UNIT_DURATIONS[index];
       if (divider > remainingMillis) {
         continue;
       }

@@ -43,5 +43,5 @@ public interface Scheduler {
       final Duration delay,
       final ThrowingSupplier<T, Exception> supplier);
 
-  void schedule(final SchedulerPoll poll, final Runnable task, final Duration period);
+  void schedule(final SchedulerPoll poll, final Runnable task, final Duration duration);
 }

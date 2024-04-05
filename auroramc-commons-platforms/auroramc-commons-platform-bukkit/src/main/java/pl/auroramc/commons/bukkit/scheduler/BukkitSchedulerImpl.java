@@ -80,23 +80,23 @@ class BukkitSchedulerImpl implements Scheduler {
   }
 
   @Override
-  public void schedule(final SchedulerPoll poll, final Runnable task, final Duration period) {
+  public void schedule(final SchedulerPoll poll, final Runnable task, final Duration duration) {
     if (poll == SYNC) {
-      scheduleSync(task, period);
+      scheduleSync(task, duration);
     }
 
     if (poll == ASYNC) {
-      scheduleAsync(task, period);
+      scheduleAsync(task, duration);
     }
   }
 
-  private void scheduleSync(final Runnable task, final Duration period) {
-    final long delay = MinecraftTimeEquivalent.of(period);
+  private void scheduleSync(final Runnable task, final Duration duration) {
+    final long delay = MinecraftTimeEquivalent.of(duration);
     bukkitScheduler.runTaskTimer(plugin, task, delay, delay);
   }
 
-  private void scheduleAsync(final Runnable task, final Duration period) {
-    final long delay = MinecraftTimeEquivalent.of(period);
+  private void scheduleAsync(final Runnable task, final Duration duration) {
+    final long delay = MinecraftTimeEquivalent.of(duration);
     bukkitScheduler.runTaskTimerAsynchronously(plugin, task, delay, delay);
   }
 }
