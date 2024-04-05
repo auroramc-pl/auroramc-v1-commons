@@ -1,7 +1,7 @@
 package pl.auroramc.commons.scheduler;
 
 import static java.time.Duration.ZERO;
-import static pl.auroramc.commons.scheduler.SchedulerUtils.NOTHING;
+import static pl.auroramc.commons.scheduler.SchedulerUtils.NIL;
 
 import com.pivovarit.function.ThrowingSupplier;
 import java.time.Duration;
@@ -15,7 +15,7 @@ public interface Scheduler {
             pool,
             () -> {
               task.run();
-              return NOTHING;
+              return NIL;
             })
         .exceptionally(CompletableFutureUtils::delegateCaughtException);
   }
@@ -27,7 +27,7 @@ public interface Scheduler {
             delay,
             () -> {
               task.run();
-              return NOTHING;
+              return NIL;
             })
         .exceptionally(CompletableFutureUtils::delegateCaughtException);
   }
