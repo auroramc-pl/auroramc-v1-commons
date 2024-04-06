@@ -54,6 +54,12 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>dev.rollczi</groupId>
+      <artifactId>litecommands-bukkit</artifactId>
+      <version>3.4.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>com.github.stefvanschie.inventoryframework</groupId>
       <artifactId>IF</artifactId>
       <version>0.10.13</version>

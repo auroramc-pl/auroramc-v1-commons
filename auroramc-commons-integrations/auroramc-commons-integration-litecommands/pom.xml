@@ -23,14 +23,14 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>dev.rollczi</groupId>
-      <artifactId>litecommands-core</artifactId>
-      <version>3.4.1</version>
+      <groupId>pl.auroramc</groupId>
+      <artifactId>auroramc-commons-integration-okaeri-configs</artifactId>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>dev.rollczi</groupId>
-      <artifactId>litecommands-annotations</artifactId>
+      <artifactId>litecommands-framework</artifactId>
       <version>3.4.1</version>
       <scope>provided</scope>
     </dependency>

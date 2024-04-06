@@ -1,4 +1,4 @@
-package pl.auroramc.commons.config.serdes.juliet;
+package pl.auroramc.commons.config.juliet;
 
 import com.zaxxer.hikari.HikariConfig;
 import eu.okaeri.configs.OkaeriConfig;
