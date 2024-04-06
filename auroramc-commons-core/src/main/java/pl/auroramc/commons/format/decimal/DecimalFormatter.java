@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 public class DecimalFormatter {
 
-  public static final String TRUNCATED_AMOUNT_DELIMITER = ".";
+  private static final String TRUNCATED_AMOUNT_DELIMITER = ".";
   private static final int INTEGRAL_PART_INIT_OFFSET = 1;
   private static final char[] SCALE_SUFFIXES = {'k', 'm', 'g', 't', 'p', 'e'};
   private static final long[] SCALE_FACTORS = {
