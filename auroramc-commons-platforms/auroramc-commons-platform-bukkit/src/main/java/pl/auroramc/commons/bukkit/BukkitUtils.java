@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
+import pl.auroramc.commons.bukkit.item.ItemStackBuilder;
 
 public final class BukkitUtils {
 
@@ -22,6 +23,24 @@ public final class BukkitUtils {
         .forEach(
             (index, remainingItemStack) ->
                 player.getWorld().dropItemNaturally(player.getLocation(), remainingItemStack));
+  }
+
+  static void increaseQuantityOfHeldItem(final Player player) {
+    final ItemStack itemStack = player.getInventory().getItemInMainHand();
+    if (itemStack.getAmount() == itemStack.getMaxStackSize()) {
+      giveOrDropItemStack(player, ItemStackBuilder.newBuilder(itemStack.clone()).count(1).build());
+    } else {
+      itemStack.setAmount(itemStack.getAmount() + 1);
+    }
+  }
+
+  static void decreaseQuantityOfHeldItem(final Player player) {
+    final ItemStack itemStack = player.getInventory().getItemInMainHand();
+    if (itemStack.getAmount() == 1) {
+      player.getInventory().setItemInMainHand(null);
+    } else {
+      itemStack.setAmount(itemStack.getAmount() - 1);
+    }
   }
 
   public static <T> T resolveService(final Server server, final Class<T> serviceType) {

@@ -50,6 +50,11 @@ public final class ItemStackBuilder {
     return this;
   }
 
+  public ItemStackBuilder count(final int count) {
+    itemStack.setAmount(count);
+    return this;
+  }
+
   public ItemStackBuilder lore(final Component... lines) {
     itemMeta.lore(List.of(lines));
     return this;
