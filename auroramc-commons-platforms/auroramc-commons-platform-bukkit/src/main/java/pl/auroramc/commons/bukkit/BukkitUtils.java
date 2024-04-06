@@ -25,7 +25,7 @@ public final class BukkitUtils {
                 player.getWorld().dropItemNaturally(player.getLocation(), remainingItemStack));
   }
 
-  static void increaseQuantityOfHeldItem(final Player player) {
+  public static void increaseQuantityOfHeldItem(final Player player) {
     final ItemStack itemStack = player.getInventory().getItemInMainHand();
     if (itemStack.getAmount() == itemStack.getMaxStackSize()) {
       giveOrDropItemStack(player, ItemStackBuilder.newBuilder(itemStack.clone()).count(1).build());
@@ -34,7 +34,7 @@ public final class BukkitUtils {
     }
   }
 
-  static void decreaseQuantityOfHeldItem(final Player player) {
+  public static void decreaseQuantityOfHeldItem(final Player player) {
     final ItemStack itemStack = player.getInventory().getItemInMainHand();
     if (itemStack.getAmount() == 1) {
       player.getInventory().setItemInMainHand(null);
