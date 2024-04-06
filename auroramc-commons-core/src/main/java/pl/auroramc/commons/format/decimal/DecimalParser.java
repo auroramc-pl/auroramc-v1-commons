@@ -48,11 +48,7 @@ public class DecimalParser {
       break;
     }
 
-    try {
-      return new BigDecimal(input);
-    } catch (final NumberFormatException exception) {
-      return null;
-    }
+    return new BigDecimal(input);
   }
 
   private static BigDecimal getParsedDecimal(
