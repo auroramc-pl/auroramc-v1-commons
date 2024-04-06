@@ -25,13 +25,13 @@
     <dependency>
       <groupId>dev.rollczi</groupId>
       <artifactId>litecommands-core</artifactId>
-      <version>3.4.0</version>
+      <version>3.4.1</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>dev.rollczi</groupId>
       <artifactId>litecommands-annotations</artifactId>
-      <version>3.4.0</version>
+      <version>3.4.1</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
