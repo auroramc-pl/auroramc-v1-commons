@@ -5,6 +5,7 @@ import static pl.auroramc.messages.placeholder.resolver.BukkitPlaceholderResolve
 import static pl.auroramc.messages.placeholder.scanner.PlaceholderScanner.getPlaceholderScanner;
 import static pl.auroramc.messages.placeholder.transformer.registry.ObjectTransformerRegistry.getObjectTransformerRegistry;
 
+import java.util.concurrent.Executor;
 import org.bukkit.command.CommandSender;
 import pl.auroramc.commons.bukkit.message.placeholder.transformer.pack.BukkitObjectTransformerPack;
 import pl.auroramc.commons.message.placeholder.transformer.pack.CommonsObjectTransformerPack;
@@ -15,9 +16,10 @@ import pl.auroramc.messages.placeholder.transformer.pack.standard.StandardObject
 public interface BukkitMessageCompiler extends MessageCompiler<CommandSender> {
 
   static BukkitMessageCompiler getBukkitMessageCompiler(
-      final ObjectTransformerPack... transformerPacks) {
+      final Executor executor, final ObjectTransformerPack... transformerPacks) {
     final BukkitMessageCompiler messageCompiler =
         getBukkitMessageCompiler(
+            executor,
             getBukkitPlaceholderResolver(
                 getObjectTransformerRegistry(transformerPacks),
                 getPlaceholderScanner(),
@@ -29,7 +31,7 @@ public interface BukkitMessageCompiler extends MessageCompiler<CommandSender> {
   }
 
   static BukkitMessageCompiler getBukkitMessageCompiler(
-      final PlaceholderResolver<CommandSender> placeholderResolver) {
-    return new BukkitMessageCompilerImpl(placeholderResolver);
+      final Executor executor, final PlaceholderResolver<CommandSender> placeholderResolver) {
+    return new BukkitMessageCompilerImpl(executor, placeholderResolver);
   }
 }
