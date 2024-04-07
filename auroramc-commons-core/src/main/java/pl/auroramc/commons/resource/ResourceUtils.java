@@ -36,9 +36,9 @@ public final class ResourceUtils {
           continue;
         }
 
-        if (!resourceFile.getParentFile().exists() && !resourceFile.getParentFile().mkdirs()) {
+        if (!resourceFile.getParentFile().exists()) {
           throw new IllegalStateException(
-              "Could not create parent directories for resource file: %s"
+              "Could not create parent directory for resource file: %s"
                   .formatted(resourceFile.getPath()));
         }
 
