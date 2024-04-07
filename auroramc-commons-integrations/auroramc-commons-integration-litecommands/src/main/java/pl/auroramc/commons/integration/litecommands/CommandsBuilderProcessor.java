@@ -3,6 +3,7 @@ package pl.auroramc.commons.integration.litecommands;
 import static dev.rollczi.litecommands.message.LiteMessages.COMMAND_COOLDOWN;
 import static dev.rollczi.litecommands.message.LiteMessages.INVALID_USAGE;
 import static dev.rollczi.litecommands.message.LiteMessages.MISSING_PERMISSIONS;
+import static dev.rollczi.litecommands.schematic.SchematicFormat.angleBrackets;
 import static pl.auroramc.commons.config.command.CommandMessageSourcePaths.DURATION_PATH;
 import static pl.auroramc.commons.config.command.CommandMessageSourcePaths.SCHEMATICS_PATH;
 import static pl.auroramc.messages.message.MutableMessage.LINE_DELIMITER;
@@ -17,12 +18,12 @@ import pl.auroramc.commons.config.command.CommandMessageSource;
 import pl.auroramc.commons.integration.litecommands.argument.resolver.standard.BigDecimalArgumentResolver;
 import pl.auroramc.commons.integration.litecommands.message.MutableMessageHandler;
 import pl.auroramc.commons.integration.litecommands.message.group.MutableMessageGroupHandler;
+import pl.auroramc.commons.integration.litecommands.schematic.DefaultSchematicGenerator;
 import pl.auroramc.messages.message.MutableMessage;
 import pl.auroramc.messages.message.compiler.MessageCompiler;
 import pl.auroramc.messages.message.group.MutableMessageGroup;
 
-public class CommandsBuilderProcessor<
-        SENDER extends Audience, SETTINGS extends PlatformSettings>
+public class CommandsBuilderProcessor<SENDER extends Audience, SETTINGS extends PlatformSettings>
     implements LiteBuilderProcessor<SENDER, SETTINGS> {
 
   private final CommandMessageSource messageSource;
@@ -51,6 +52,9 @@ public class CommandsBuilderProcessor<
             context ->
                 messageSource.commandOnCooldown.placeholder(
                     DURATION_PATH, context.getRemainingDuration()))
+        .schematicGenerator(
+            new DefaultSchematicGenerator<>(
+                angleBrackets(), internal.getValidatorService(), internal.getWrapperRegistry()))
         .result(MutableMessage.class, new MutableMessageHandler<>(messageCompiler))
         .result(MutableMessageGroup.class, new MutableMessageGroupHandler<>(messageCompiler));
   }
