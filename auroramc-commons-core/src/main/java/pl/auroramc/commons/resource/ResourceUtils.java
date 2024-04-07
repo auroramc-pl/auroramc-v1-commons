@@ -20,13 +20,22 @@ public final class ResourceUtils {
   private ResourceUtils() {}
 
   public static List<File> unpackResources(
-      final File file, final File dataFile, final String path) {
+      final File file,
+      final File dataFile,
+      final String path,
+      final String prefix,
+      final String suffix) {
     final List<File> resources = new ArrayList<>();
     try (final JarFile jarFile = new JarFile(file)) {
       final Set<JarEntry> entries = getUnmodifiableSetOf(jarFile.entries().asIterator());
       for (final JarEntry entry : entries) {
         final String entryName = entry.getName();
         if (!entryName.startsWith(path + '/') || entryName.endsWith("/")) {
+          continue;
+        }
+
+        final String fileName = entryName.substring(path.length() + 1);
+        if (!fileName.startsWith(prefix) || !fileName.endsWith(suffix)) {
           continue;
         }
 

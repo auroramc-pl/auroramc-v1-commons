@@ -10,7 +10,8 @@ import java.util.Locale;
 import org.bukkit.command.CommandSender;
 import pl.auroramc.messages.i18n.locale.LocaleProvider;
 
-class BukkitMessageFacadeImpl extends MutableMessageService<CommandSender> implements BukkitMessageFacade {
+class BukkitMessageFacadeImpl extends MutableMessageService<CommandSender>
+    implements BukkitMessageFacade {
 
   BukkitMessageFacadeImpl(
       final Locale fallbackLocale, final LocaleProvider<CommandSender> localeProvider) {
@@ -25,7 +26,7 @@ class BukkitMessageFacadeImpl extends MutableMessageService<CommandSender> imple
       final String path,
       final String prefix,
       final String suffix) {
-    unpackResources(jarFile, dataPath, path)
+    unpackResources(jarFile, dataPath, path, prefix, suffix)
         .forEach(resourceFile -> registerResource(messageSourceType, prefix, suffix, resourceFile));
     return this;
   }
