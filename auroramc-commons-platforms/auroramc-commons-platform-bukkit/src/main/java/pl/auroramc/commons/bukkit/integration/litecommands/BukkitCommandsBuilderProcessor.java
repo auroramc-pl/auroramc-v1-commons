@@ -7,8 +7,8 @@ import dev.rollczi.litecommands.LiteCommandsBuilder;
 import dev.rollczi.litecommands.LiteCommandsInternal;
 import dev.rollczi.litecommands.bukkit.LiteBukkitSettings;
 import org.bukkit.command.CommandSender;
-import pl.auroramc.commons.config.command.CommandMessageSource;
-import pl.auroramc.commons.integration.litecommands.CommandsBuilderProcessor;
+import pl.auroramc.commons.integration.configs.command.CommandMessageSource;
+import pl.auroramc.commons.integration.commands.CommandsBuilderProcessor;
 import pl.auroramc.messages.message.compiler.MessageCompiler;
 
 public class BukkitCommandsBuilderProcessor
