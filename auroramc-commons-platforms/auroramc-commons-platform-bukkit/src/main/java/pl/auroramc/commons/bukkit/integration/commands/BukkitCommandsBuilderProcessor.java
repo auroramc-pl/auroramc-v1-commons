@@ -1,4 +1,4 @@
-package pl.auroramc.commons.bukkit.integration.litecommands;
+package pl.auroramc.commons.bukkit.integration.commands;
 
 import static dev.rollczi.litecommands.bukkit.LiteBukkitMessages.PLAYER_NOT_FOUND;
 import static dev.rollczi.litecommands.bukkit.LiteBukkitMessages.PLAYER_ONLY;
