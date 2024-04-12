@@ -7,6 +7,7 @@ import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
@@ -16,6 +17,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import pl.auroramc.messages.message.compiler.CompiledMessage;
 
 public final class ItemStackBuilder {
 
@@ -40,6 +42,10 @@ public final class ItemStackBuilder {
     return this;
   }
 
+  public ItemStackBuilder displayName(final CompiledMessage displayName) {
+    return displayName(displayName.getComponent());
+  }
+
   public ItemStackBuilder displayName(final String unparsedDisplayName) {
     return displayName(miniMessage().deserialize(unparsedDisplayName).decoration(ITALIC, FALSE));
   }
@@ -61,13 +67,12 @@ public final class ItemStackBuilder {
   }
 
   public ItemStackBuilder lore(final String... lines) {
-    return lore(getFormattedLines(lines));
+    return lore(
+        resolveComponent(line -> miniMessage().deserialize(line).decoration(ITALIC, FALSE), lines));
   }
 
-  private Component[] getFormattedLines(final String... lines) {
-    return stream(lines)
-        .map(line -> miniMessage().deserialize(line).decoration(ITALIC, FALSE))
-        .toArray(Component[]::new);
+  public ItemStackBuilder lore(final CompiledMessage... lines) {
+    return lore(resolveComponent(CompiledMessage::getComponent, lines));
   }
 
   public <K, V> ItemStackBuilder data(
@@ -99,5 +104,10 @@ public final class ItemStackBuilder {
   public ItemStack build() {
     itemStack.setItemMeta(itemMeta);
     return itemStack;
+  }
+
+  private @SafeVarargs <T> Component[] resolveComponent(
+      final Function<T, Component> retriever, final T... values) {
+    return stream(values).map(retriever).toArray(Component[]::new);
   }
 }
