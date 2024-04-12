@@ -1,7 +1,5 @@
 package pl.auroramc.commons.integration.commands.message.group;
 
-import static pl.auroramc.messages.message.display.MessageDisplay.CHAT;
-
 import dev.rollczi.litecommands.handler.result.ResultHandler;
 import dev.rollczi.litecommands.handler.result.ResultHandlerChain;
 import dev.rollczi.litecommands.invocation.Invocation;
@@ -23,6 +21,6 @@ public class MutableMessageGroupHandler<T extends Audience>
       final Invocation<T> invocation,
       final MutableMessageGroup group,
       final ResultHandlerChain<T> chain) {
-    messageCompiler.compileGroup(group).deliver(CHAT);
+    messageCompiler.compileGroup(group).deliver();
   }
 }

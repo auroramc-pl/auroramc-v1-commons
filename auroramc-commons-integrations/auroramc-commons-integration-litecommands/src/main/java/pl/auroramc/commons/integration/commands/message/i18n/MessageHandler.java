@@ -1,7 +1,5 @@
 package pl.auroramc.commons.integration.commands.message.i18n;
 
-import static pl.auroramc.messages.message.display.MessageDisplay.CHAT;
-
 import dev.rollczi.litecommands.handler.result.ResultHandler;
 import dev.rollczi.litecommands.handler.result.ResultHandlerChain;
 import dev.rollczi.litecommands.invocation.Invocation;
@@ -33,6 +31,6 @@ public class MessageHandler<T extends Audience>
             messageFacade
                 .getMessage(invocation.sender(), message.key())
                 .placeholders(message.placeholders()))
-        .deliver(invocation.sender(), CHAT);
+        .deliver(invocation.sender());
   }
 }
