@@ -5,9 +5,9 @@ import static pl.auroramc.commons.format.decimal.DecimalFormatter.getFormattedDe
 import java.math.BigDecimal;
 import pl.auroramc.messages.placeholder.transformer.pack.ObjectTransformer;
 
-class StringToBigDecimalTransformer implements ObjectTransformer<BigDecimal, String> {
+class StringByBigDecimalTransformer implements ObjectTransformer<BigDecimal, String> {
 
-  StringToBigDecimalTransformer() {}
+  StringByBigDecimalTransformer() {}
 
   @Override
   public String transform(final BigDecimal value) {

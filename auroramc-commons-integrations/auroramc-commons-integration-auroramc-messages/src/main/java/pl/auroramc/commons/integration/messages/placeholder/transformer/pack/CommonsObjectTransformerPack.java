@@ -22,10 +22,10 @@ public class CommonsObjectTransformerPack implements ObjectTransformerPack {
 
   @Override
   public void register(final ObjectTransformerRegistry transformerRegistry) {
-    transformerRegistry.register(new StringToBigDecimalTransformer());
-    transformerRegistry.register(new StringToDurationTransformer(durationFormatter));
-    transformerRegistry.register(new StringToInstantTransformer());
-    transformerRegistry.register(new StringToLocalDateTimeTransformer());
-    transformerRegistry.register(new StringToLocalDateTransformer());
+    transformerRegistry.register(new StringByBigDecimalTransformer());
+    transformerRegistry.register(new StringByDurationTransformer(durationFormatter));
+    transformerRegistry.register(new StringByInstantTransformer());
+    transformerRegistry.register(new StringByLocalDateTimeTransformer());
+    transformerRegistry.register(new StringByLocalDateTransformer());
   }
 }

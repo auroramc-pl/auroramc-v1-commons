@@ -5,9 +5,9 @@ import static pl.auroramc.commons.format.temporal.TemporalFormatter.getFormatted
 import java.time.LocalDateTime;
 import pl.auroramc.messages.placeholder.transformer.pack.ObjectTransformer;
 
-class StringToLocalDateTimeTransformer implements ObjectTransformer<LocalDateTime, String> {
+class StringByLocalDateTimeTransformer implements ObjectTransformer<LocalDateTime, String> {
 
-  StringToLocalDateTimeTransformer() {}
+  StringByLocalDateTimeTransformer() {}
 
   @Override
   public String transform(final LocalDateTime value) {
