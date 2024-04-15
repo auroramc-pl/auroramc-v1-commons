@@ -30,8 +30,12 @@ public final class ResourceUtils {
       final Set<JarEntry> entries = getUnmodifiableSet(jarFile.entries().asIterator());
       for (final JarEntry entry : entries) {
         final String entryName = entry.getName();
+        if (!isExpectedPath(entryName, path)) {
+          continue;
+        }
+
         final String fileName = entryName.substring(path.length() + 1);
-        if (!isExpectedPath(entryName, path) || !isExpectedFile(fileName, prefix, suffix)) {
+        if (!isExpectedFile(fileName, prefix, suffix)) {
           continue;
         }
 
