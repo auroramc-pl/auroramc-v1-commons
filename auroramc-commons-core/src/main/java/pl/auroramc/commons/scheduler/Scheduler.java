@@ -6,7 +6,7 @@ import static pl.auroramc.commons.scheduler.SchedulerUtils.NIL;
 import com.pivovarit.function.ThrowingSupplier;
 import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
-import pl.auroramc.commons.CompletableFutureUtils;
+import pl.auroramc.commons.concurrent.CompletableFutureUtils;
 
 public interface Scheduler {
 

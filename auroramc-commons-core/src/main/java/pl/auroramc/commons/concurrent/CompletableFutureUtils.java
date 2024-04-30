@@ -1,4 +1,4 @@
-package pl.auroramc.commons;
+package pl.auroramc.commons.concurrent;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
 import static java.util.logging.Level.SEVERE;
