@@ -11,7 +11,6 @@
   <modules>
     <module>auroramc-commons-core</module>
     <module>auroramc-commons-platforms</module>
-    <module>auroramc-commons-integrations</module>
   </modules>
 
   <properties>

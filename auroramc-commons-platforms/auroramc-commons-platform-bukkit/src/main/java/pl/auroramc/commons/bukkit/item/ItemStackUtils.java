@@ -5,11 +5,9 @@ import static pl.auroramc.commons.collection.CollectionUtils.merge;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import pl.auroramc.messages.message.compiler.CompiledMessage;
 
 public final class ItemStackUtils {
 
@@ -56,10 +54,5 @@ public final class ItemStackUtils {
                 List.of(lines),
                 Component[]::new))
         .build();
-  }
-
-  public static ItemStack mergeLore(final ItemStack itemStack, final CompiledMessage... lines) {
-    return mergeLore(
-        itemStack, Stream.of(lines).map(CompiledMessage::getComponent).toArray(Component[]::new));
   }
 }

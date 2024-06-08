@@ -17,7 +17,10 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/auroramc-commons-integrations/auroramc-commons-integration-auroramc-messages/pom.xml" />
+        <option value="$PROJECT_DIR$/auroramc-commons-integrations/auroramc-commons-integration-litecommands/pom.xml" />
         <option value="$PROJECT_DIR$/auroramc-commons-integrations/auroramc-commons-integration-messages/pom.xml" />
+        <option value="$PROJECT_DIR$/auroramc-commons-integrations/pom.xml" />
       </set>
     </option>
   </component>

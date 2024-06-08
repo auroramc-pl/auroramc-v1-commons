@@ -23,18 +23,6 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>pl.auroramc</groupId>
-      <artifactId>auroramc-commons-integration-litecommands</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>pl.auroramc</groupId>
-      <artifactId>auroramc-commons-integration-okaeri-configs</artifactId>
-      <version>${project.parent.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>eu.okaeri</groupId>
       <artifactId>okaeri-configs-yaml-snakeyaml</artifactId>
       <version>5.0.1</version>

@@ -17,7 +17,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
-import pl.auroramc.messages.message.compiler.CompiledMessage;
 
 public final class ItemStackBuilder {
 
@@ -40,10 +39,6 @@ public final class ItemStackBuilder {
   public ItemStackBuilder displayName(final Component displayName) {
     itemMeta.displayName(displayName);
     return this;
-  }
-
-  public ItemStackBuilder displayName(final CompiledMessage displayName) {
-    return displayName(displayName.getComponent());
   }
 
   public ItemStackBuilder displayName(final String unparsedDisplayName) {
@@ -69,10 +64,6 @@ public final class ItemStackBuilder {
   public ItemStackBuilder lore(final String... lines) {
     return lore(
         resolveComponent(line -> miniMessage().deserialize(line).decoration(ITALIC, FALSE), lines));
-  }
-
-  public ItemStackBuilder lore(final CompiledMessage... lines) {
-    return lore(resolveComponent(CompiledMessage::getComponent, lines));
   }
 
   public <K, V> ItemStackBuilder data(
