@@ -1,8 +1,10 @@
-package pl.auroramc.commons.math;
+package pl.auroramc.commons.math.curve;
 
 import static java.lang.Math.ceil;
 import static java.lang.Math.pow;
 import static java.util.Arrays.copyOf;
+
+import pl.auroramc.commons.math.Point;
 
 public final class BezierCurve {
 
