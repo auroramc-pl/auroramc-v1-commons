@@ -17,14 +17,26 @@ import java.util.jar.JarFile;
 
 public final class ResourceUtils {
 
+  private static final String BLANK = "";
+
   private ResourceUtils() {}
+
+  public static List<File> unpackResources(
+      final File file, final File dataFile, final Set<String> paths, final Set<String> omittedFileNames) {
+    final List<File> resources = new ArrayList<>();
+    for (final String path : paths) {
+      resources.addAll(unpackResources(file, dataFile, path, BLANK, BLANK, omittedFileNames));
+    }
+    return resources;
+  }
 
   public static List<File> unpackResources(
       final File file,
       final File dataFile,
       final String path,
       final String prefix,
-      final String suffix) {
+      final String suffix,
+      final Set<String> omittedFileNames) {
     final List<File> resources = new ArrayList<>();
     try (final JarFile jarFile = new JarFile(file)) {
       final Set<JarEntry> entries = getUnmodifiableSet(jarFile.entries().asIterator());
@@ -35,7 +47,7 @@ public final class ResourceUtils {
         }
 
         final String fileName = entryName.substring(path.length() + 1);
-        if (!isExpectedFile(fileName, prefix, suffix)) {
+        if (!isExpectedFile(fileName, prefix, suffix, omittedFileNames)) {
           continue;
         }
 
@@ -62,8 +74,13 @@ public final class ResourceUtils {
   }
 
   private static boolean isExpectedFile(
-      final String fileName, final String prefix, final String suffix) {
-    return fileName.startsWith(prefix) && fileName.endsWith(suffix);
+      final String fileName,
+      final String prefix,
+      final String suffix,
+      final Set<String> omittedFileNames) {
+    return fileName.startsWith(prefix)
+        && fileName.endsWith(suffix)
+        && !omittedFileNames.contains(fileName);
   }
 
   private static void createNecessaryFilesAndDirectories(
