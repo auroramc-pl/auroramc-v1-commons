@@ -27,11 +27,24 @@ public final class BukkitUtils {
     services.forEach(service -> registerService(plugin, service));
   }
 
-  public static <T> void registerService(final Plugin plugin, final T service) {
+  public static void registerFacades(final Plugin plugin, final Set<?> facades) {
+    facades.forEach(facade -> registerFacade(plugin, facade));
+  }
+
+  public static <T> void registerService(final Plugin plugin, final T service, final Class<? super T> serviceType) {
     plugin
         .getServer()
         .getServicesManager()
-        .register(getFacadeType(service), service, plugin, ServicePriority.Normal);
+        .register(serviceType, service, plugin, ServicePriority.Normal);
+  }
+
+  public static <T> void registerService(final Plugin plugin, final T service) {
+    // noinspection unchecked
+    registerService(plugin, service, (Class<T>) service.getClass());
+  }
+
+  public static <T> void registerFacade(final Plugin plugin, final T facade) {
+    registerService(plugin, facade, getFacadeType(facade));
   }
 
   public static void registerListeners(final Plugin plugin, final Listener... bunchOfListeners) {
