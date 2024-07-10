@@ -4,6 +4,7 @@ import static java.util.Spliterator.ORDERED;
 import static java.util.Spliterators.spliteratorUnknownSize;
 import static java.util.stream.Collectors.toUnmodifiableSet;
 import static java.util.stream.StreamSupport.stream;
+import static pl.auroramc.commons.format.StringUtils.BLANK;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,8 +17,6 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public final class ResourceUtils {
-
-  private static final String BLANK = "";
 
   private ResourceUtils() {}
 
