@@ -1,4 +1,4 @@
-package pl.auroramc.commons;
+package pl.auroramc.commons.view;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
