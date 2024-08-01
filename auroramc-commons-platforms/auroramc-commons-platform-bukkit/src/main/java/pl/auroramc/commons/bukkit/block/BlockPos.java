@@ -24,7 +24,7 @@ public record BlockPos(int x, int y, int z) {
     return new BlockPos(x, y, z);
   }
 
-  public long getBlockEntityId() {
+  public long getEntityId() {
     final long shiftedX = x & 0x1FFF;
     final long shiftedY = y & 0x1FF;
     final long shiftedZ = z & 0x1FFF;
