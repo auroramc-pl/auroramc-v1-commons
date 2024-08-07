@@ -2,6 +2,7 @@ package pl.auroramc.commons.bukkit;
 
 import static java.util.Optional.ofNullable;
 
+import java.util.HashSet;
 import java.util.Set;
 import org.bukkit.Server;
 import org.bukkit.event.Listener;
@@ -31,7 +32,8 @@ public final class BukkitUtils {
     facades.forEach(facade -> registerFacade(plugin, facade));
   }
 
-  public static <T> void registerService(final Plugin plugin, final T service, final Class<? super T> serviceType) {
+  public static <T> void registerService(
+      final Plugin plugin, final T service, final Class<? super T> serviceType) {
     plugin
         .getServer()
         .getServicesManager()
@@ -55,8 +57,19 @@ public final class BukkitUtils {
 
   @SuppressWarnings("unchecked")
   private static <T> Class<T> getFacadeType(final T service) {
-    return service.getClass().getInterfaces().length == 0
-        ? (Class<T>) service.getClass()
-        : (Class<T>) service.getClass().getInterfaces()[0];
+    final Class<?>[] interfaces = getInterfacesOf(service.getClass()).toArray(Class[]::new);
+    return (Class<T>) (interfaces.length == 0 ? service.getClass() : interfaces[0]);
+  }
+
+  public static Set<Class<?>> getInterfacesOf(Class<?> clazz) {
+    final Set<Class<?>> interfaces = new HashSet<>();
+    while (clazz != null) {
+      for (final Class<?> value : clazz.getInterfaces()) {
+        interfaces.add(value);
+        interfaces.addAll(getInterfacesOf(value));
+      }
+      clazz = clazz.getSuperclass();
+    }
+    return interfaces;
   }
 }
